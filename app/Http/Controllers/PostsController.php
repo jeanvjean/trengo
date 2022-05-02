@@ -40,7 +40,7 @@ class PostsController extends Controller
             ->orWhere('content', 'ilike', '%' . $search . '%')
             ->orderBy('views', 'desc')
             ->orderBy('average_rating', 'desc')
-            ->get();
+            ->paginate(20);
         }else {
             $posts = DB::table('posts')
             ->join('categories', 'posts.category_id', '=', 'categories.id')
@@ -53,7 +53,7 @@ class PostsController extends Controller
             ->orWhere('content', 'ilike', '%' . $search . '%')
             ->orderBy('views', 'desc')
             ->orderBy('average_rating', 'desc')
-            ->get();
+            ->paginate(20);
         }
         return $posts;
     }
